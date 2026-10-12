@@ -61,8 +61,10 @@ Certifique-se de ter o JDK 17 ou superior instalado em sua máquina.
 
 Clone este repositório:
 
-Bash
+~~~
 git clone [https://github.com/seu-usuario/seu-repositorio.git](https://github.com/seu-usuario/seu-repositorio.git)
+~~~
+
 Importe o projeto em sua IDE favorita (Eclipse, IntelliJ IDEA ou VS Code).
 
 Execute a classe principal Test.java para visualizar a execução dos padrões integrados.
