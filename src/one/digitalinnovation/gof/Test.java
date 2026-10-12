@@ -9,13 +9,17 @@ import one.digitalinnovation.gof.strategy.ComportamentoAgressivo;
 import one.digitalinnovation.gof.strategy.ComportamentoDefensivo;
 import one.digitalinnovation.gof.strategy.ComportamentoNormal;
 import one.digitalinnovation.gof.strategy.Robo;
+import subsistema1.crm.CrmService;
+import subsistema1.crm.ICrmService;
+import subsistema2.cep.CepApi;
+import subsistema2.cep.ICepService;
 
 public class Test {
 
 	public static void main(String[] args) {
 		
 		// Singleton
-		
+		System.out.println("--- Testando Singleton ---");
 		SingletonLazy lazy = SingletonLazy.getInstancia();
 		System.out.println(lazy);
 		lazy = SingletonLazy.getInstancia();
@@ -32,7 +36,7 @@ public class Test {
 		System.out.println(lazyHolder);
 		
 		// Strategy
-		
+		System.out.println("\n--- Testando Strategy ---");
 		Comportamento defensivo = new ComportamentoDefensivo();
 		Comportamento normal = new ComportamentoNormal();
 		Comportamento agressivo = new ComportamentoAgressivo();
@@ -48,10 +52,20 @@ public class Test {
 		robo.mover();
 		robo.mover();
 		
-		// Facade
+		// Facade (Com Injeção de Dependências)
+		System.out.println("\n--- Testando Facade ---");
+		ICepService cepService = CepApi.getInstancia();
+		ICrmService crmService = CrmService.getInstancia();
 		
-		Facade facade = new Facade();
+		Facade facade = new Facade(cepService, crmService);
 		facade.migrarCliente("Venilton", "14801788");
+		
+		// Teste opcional de validação de parâmetros que adicionamos na Facade:
+		try {
+			facade.migrarCliente("João", "123"); // CEP inválido propositalmente
+		} catch (IllegalArgumentException e) {
+			System.out.println("Validação funcionou com sucesso: " + e.getMessage());
+		}
 	}
 
 }
