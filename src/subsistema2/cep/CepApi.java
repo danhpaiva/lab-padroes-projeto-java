@@ -1,6 +1,6 @@
 package subsistema2.cep;
 
-public class CepApi {
+public class CepApi implements ICepService {
 
 	private static CepApi instancia = new CepApi();
 
@@ -12,10 +12,13 @@ public class CepApi {
 		return instancia;
 	}
 	
+	@Override
 	public String recuperarCidade(String cep) {
+		// Poderia integrar com uma API real de consulta de CEP (ex: ViaCEP)
 		return "Araraquara";
 	}
 	
+	@Override
 	public String recuperarEstado(String cep) {
 		return "SP";
 	}
